@@ -40,20 +40,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    
-    // protected function validateLogin(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'email' => 'required|string',
-    //         'password' => 'required|string'
-    //     ]);
-    //     $credentials = $request->only('email','password');
-    //     if(Auth::attempt($credentials) && Auth::user()->is_verified == 1){
-            
-    //     }
-    //     else{
-    //         dd("Failed");
-    //     }
-    // }
 }

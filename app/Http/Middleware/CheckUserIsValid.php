@@ -18,7 +18,7 @@ class CheckUserIsValid
     public function handle(Request $request, Closure $next)
     {
         if(Auth::user()->is_verified !== 1){
-            return redirect()->route('abc');
+            return redirect()->route('verifyPage');
         }
         return $next($request);
     }
