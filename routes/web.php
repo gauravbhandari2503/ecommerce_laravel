@@ -27,3 +27,5 @@ Route::get('/verifyPage',function(){
 Route::get('/test-email',[App\Http\Controllers\MailController::class, 'sendSignupEmail']);
 Route::get('/verify/{verification_code}',[App\http\Controllers\MailController::class,'verifyUser']);
 
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']) -> name('dashboard');
+

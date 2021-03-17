@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
@@ -23,7 +24,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user();
+        //Retrieving a User's Role
+        foreach ($user->roles as $role) {
+             
+        } 
+   
+        if($role->role === 'Buyer'){
+            return view('home');
+        }
+        else{
+            return redirect()->route('dashboard');
+        }
         
     }
 }
