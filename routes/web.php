@@ -29,7 +29,7 @@ Route::get('/verify/{verification_code}',[App\http\Controllers\MailController::c
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']) -> name('dashboard');
 
-Route::prefix('dashboard')->group(function(){
+Route::prefix('dashboard')->middleware('role:Seller')->group(function(){
     Route::get('/profile', [App\Http\Controllers\SellerProfileController::class, 'index']) -> name('profilepage');
     Route::post('/profile', [App\Http\Controllers\SellerProfileController::class, 'update_avatar']) -> name('profile.image');
 
