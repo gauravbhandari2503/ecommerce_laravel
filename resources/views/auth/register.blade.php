@@ -40,6 +40,19 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="contact" class="col-md-4 col-form-label text-md-right">{{ __('Contact') }}</label>
+
+                            <div class="col-md-6">
+                            <input id="contact" type="num"  class="form-control @error('contact') is-invalid @enderror" name="contact" >
+                                @error('contact')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Signup As') }}</label>
 
                             <div class="col-md-6">
