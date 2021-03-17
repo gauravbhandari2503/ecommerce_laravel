@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-<div class="container emp-profile mt-5 bg-primary text-white">
+<div class="container emp-profile mt-5 bg-primary text-white" >
     <div class="row">
         <div class="col-md-4">
             <div class="profile-img mt-5 ml-4">

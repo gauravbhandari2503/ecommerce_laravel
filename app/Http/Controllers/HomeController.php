@@ -31,7 +31,7 @@ class HomeController extends Controller
         } 
    
         if($role->role === 'Buyer'){
-            return view('home');
+            return view('customer.home');
         }
         else{
             return redirect()->route('dashboard');

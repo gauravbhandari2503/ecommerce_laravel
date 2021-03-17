@@ -44,6 +44,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Add Products</a>
+          <a class="dropdown-item" href="#">View Products</a>
           <a class="dropdown-item" href="#">Manage Order</a>
           <a class="dropdown-item" href="#">View Orders</a>
           <a class="dropdown-item" href="#">View Users</a>
