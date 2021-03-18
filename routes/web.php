@@ -32,6 +32,8 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'inde
 Route::prefix('dashboard')->middleware('role:Seller')->group(function(){
     Route::get('/profile', [App\Http\Controllers\SellerProfileController::class, 'index']) -> name('profilepage');
     Route::post('/profile', [App\Http\Controllers\SellerProfileController::class, 'update_avatar']) -> name('profile.image');
-
+    Route::resource('/products','App\Http\Controllers\ProductController');
 });
+
+
 
