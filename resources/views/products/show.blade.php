@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
 <div class="row ml-1" >
     <div class="col-lg-12 margin-tb">

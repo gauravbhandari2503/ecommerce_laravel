@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -29,7 +30,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::whereNull('parent_id')->with('children')->get();
+        return view('products.create')->with('categories',$categories);
     }
 
     /**
@@ -46,14 +48,15 @@ class ProductController extends Controller
             'discount' => 'required',
             'description' => 'required',
             'stock' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg'
+            'image' => 'required|image|mimes:jpeg,png,jpg',
+            'cat_id' => 'required|exists:categories,id'
         ]);
 
         $userData = Auth::user();
         $imageName = $userData->id.'_image'.time().'.'.request()->image->getClientOriginalExtension();
 
         $request->image->storeAs('products',$imageName,'public');
-
+        
         Product::create([
             'title' =>  $request['title'],
             'mrp' =>  $request['mrp'],
@@ -61,7 +64,8 @@ class ProductController extends Controller
             'description' =>  $request['description'],
             'stock' =>  $request['stock'],
             'supplier_id' => $userData->id,
-            'image' => $imageName
+            'image' => $imageName,
+            'cat_id' => $request['cat_id'],
         ]);
 
         return redirect()->route('products.index')

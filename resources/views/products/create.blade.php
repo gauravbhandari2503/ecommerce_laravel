@@ -57,6 +57,19 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
+                    <strong>Category :</strong>
+                    <select name="cat_id" id="cat_id" class="form-control">
+                        <option value="">--Select any category--</option>
+                        @foreach($categories as $key=>$cat_data)
+                        <option value='{{$cat_data->id}}'>{{$cat_data->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
                     <strong>Image:</strong>
                     <input type="file" class="form-control-file" id="image" name="image">
                 </div>

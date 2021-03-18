@@ -15,7 +15,8 @@ class Product extends Model
         'description',
         'stock',
         'best_seller',
-        'image'
+        'image',
+        'cat_id',
     ];
     use HasFactory;
 }

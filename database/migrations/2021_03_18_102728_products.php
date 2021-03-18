@@ -18,12 +18,13 @@ class Products extends Migration
             $table->timestamps();
             $table->string('title');
             $table->foreignId('supplier_id')->constrained('users')->onDelete('cascade');
-            $table->integer("mrp");
+            $table->integer('mrp');
             $table->string('discount')->nullable();
             $table->string('description')->nullable();
             $table->string('stock')->nullable();
             $table->string('best_seller')->default('0');
             $table->string('image')->default('product.jpg');
+            $table->foreignId('cat_id')->constrained('categories')->onDelete('cascade');
         });
     }
 
