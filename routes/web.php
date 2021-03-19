@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified_user');
+
 Route::get('/verifyPage',function(){
     return view('auth.verify');
 })->name('verifyPage');
@@ -37,6 +38,12 @@ Route::prefix('dashboard')->middleware('role:Seller')->group(function(){
     Route::post('dashboard/products/create',[App\Http\Controllers\CategoryController::class,'subCat'])->name('subcat');
 });
 
-
-
-
+Route::prefix('/home')->group(function(){
+    Route::resource('/items','App\Http\Controllers\UserProductController');
+    Route::get('/cart',function(){
+        return view('customer.cart');
+    });
+    Route::get('/wishlist',function(){
+        return view('customer.wishlist');
+    });
+});

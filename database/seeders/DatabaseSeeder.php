@@ -32,21 +32,21 @@ class DatabaseSeeder extends Seeder
         $categories = [
             [
                 'id'    => 1,
-                'name'  => 'electronics',
+                'name'  => 'Electronics',
             ],
             [
                 'id'    => 2,
-                'name'  => 'home appliances',
+                'name'  => 'Home Appliances',
                 'parent_id' => 1,
             ],
             [
                 'id'    => 3,
-                'name'  => 'gadgets',
+                'name'  => 'Gadgets',
                 'parent_id' => 1,
             ],
             [
                 'id'    => 4,
-                'name'  => 'phone',
+                'name'  => 'Phone',
                 'parent_id' => 3,
             ],
             [
@@ -57,6 +57,40 @@ class DatabaseSeeder extends Seeder
             [
                 'id'    => 6,
                 'name'  => 'Men clothing',
+            ],
+            [
+                'id'    => 7,
+                'name'  => 'Shoes',
+                'parent_id' => 6,
+            ],
+            [
+                'id'    => 8,
+                'name'  => 'Shirts',
+                'parent_id' => 6,
+            ],
+            [
+                'id'    => 9,
+                'name'  => 'Jeans',
+                'parent_id' => 6,
+            ],
+            [
+                'id'    => 10,
+                'name'  => 'Watches',
+                'parent_id' => 6,
+            ],
+            [
+                'id'    => 11,
+                'name'  => 'Socks',
+                'parent_id' => 6,
+            ],
+            [
+                'id'    => 12,
+                'name'  => 'Domestic',
+            ],
+            [
+                'id'    => 13,
+                'name'  => 'Food',
+                'parent_id' => 12,
             ],
         ];
         foreach ($categories as $category) {
