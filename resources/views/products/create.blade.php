@@ -58,11 +58,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Category :</strong>
-                    <select name="cat_id" id="cat_id" class="form-control">
+                    <select name="category" id="category" class="form-control browser-default custom-select">
                         <option value="">--Select any category--</option>
-                        @foreach($categories as $key=>$cat_data)
-                        <option value='{{$cat_data->id}}'>{{$cat_data->name}}</option>
+                        @foreach($categories as $item)
+                        <option value='{{$item->id}}'>{{$item->name}}</option>
                         @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Subcategory :</strong>
+                    <select name="subcategory" id="subcategory" class="form-control browser-default custom-select ">
+                        
                     </select>
                 </div>
             </div>
@@ -80,4 +88,25 @@
         </div>
 
     </form>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#category').on('change',function(e) {
+        var cat_id = e.target.value;
+        $.ajax({
+            url:"{{ route('subcat') }}",
+            type:"POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                cat_id: cat_id
+            },
+        success:function (data) {
+            $('#subcategory').empty();
+            $.each(data.subcategories[0].child,function(index,child){
+            $('#subcategory').append('<option value="'+child.id+'">'+child.name+'</option>');
+            })
+            }
+        })
+    });
+    });
+</script>
 @endsection

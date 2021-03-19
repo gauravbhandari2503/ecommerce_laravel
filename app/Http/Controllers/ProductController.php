@@ -30,7 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::whereNull('parent_id')->with('children')->get();
+        $categories = Category::whereNull('parent_id')->get();
         return view('products.create')->with('categories',$categories);
     }
 
@@ -49,7 +49,7 @@ class ProductController extends Controller
             'description' => 'required',
             'stock' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg',
-            'cat_id' => 'required|exists:categories,id'
+            'subcategory' => 'required','id'
         ]);
 
         $userData = Auth::user();
@@ -65,7 +65,7 @@ class ProductController extends Controller
             'stock' =>  $request['stock'],
             'supplier_id' => $userData->id,
             'image' => $imageName,
-            'cat_id' => $request['cat_id'],
+            'cat_id' => $request['subcategory'],
         ]);
 
         return redirect()->route('products.index')
@@ -144,6 +144,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
+
     public function destroy(Product $product)
     {
         $this->authorize('delete', $product);
