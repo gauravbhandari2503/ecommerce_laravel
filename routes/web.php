@@ -43,7 +43,6 @@ Route::prefix('/home')->group(function(){
     Route::get('/cart',function(){
         return view('customer.cart');
     });
-    Route::get('/wishlist',function(){
-        return view('customer.wishlist');
-    });
+    Route::get('/wishlist', [App\Http\Controllers\WishlistController::class,'index'])->name('wishlist');
+    Route::post('/wishlist/{id}', [App\Http\Controllers\WishlistController::class,'store'])->name('wishlistAdd');
 });

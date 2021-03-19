@@ -19,4 +19,5 @@ class Product extends Model
         'cat_id',
     ];
     use HasFactory;
+    
 }

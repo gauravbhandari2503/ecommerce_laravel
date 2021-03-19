@@ -38,7 +38,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Wishlist</a>
+            <a class="nav-link" href="{{ url('/home/wishlist') }}">Wishlist</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Cart</a>
