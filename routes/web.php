@@ -44,5 +44,7 @@ Route::prefix('/home')->group(function(){
         return view('customer.cart');
     });
     Route::get('/wishlist', [App\Http\Controllers\WishlistController::class,'index'])->name('wishlist');
-    Route::post('/wishlist/{id}', [App\Http\Controllers\WishlistController::class,'store'])->name('wishlistAdd');
+    Route::post('/wishlist/add/{id}', [App\Http\Controllers\WishlistController::class,'store'])->name('wishlistAdd');
+    Route::post('/wishlist/{id}', [App\Http\Controllers\WishlistController::class,'destroy'])->name('wishlistRemove');
+
 });

@@ -12,20 +12,20 @@
             </tr>
         </thead>
     <tbody>
-    
+    @foreach($wishlists as $wishlist)
     <tr>
 	    <td>
             <figure class="media">
 	        <div class="img-wrap"><img src="http://bootstrap-ecommerce.com/main/images/items/2.jpg" class="img-thumbnail img-sm"></div>
 	        <figcaption class="media-body">
-		    <h6 class="title text-truncate">Product name goes here </h6>
+		    <h6 class="title text-truncate">{{ $wishlist->product->title }} </h6>
 		        <dl class="param param-inline small">
-                    <dt>Size: </dt>
+                    <dt>{{ $wishlist->product->description }} </dt>
                     <dd>XXL</dd>
 		        </dl>
 		        <dl class="param param-inline small">
-                    <dt>Color: </dt>
-                    <dd>Orange color</dd>
+                    <dt>Stock: </dt>
+                    <dd>{{ $wishlist->product->stock }} </dd>
 		        </dl>
 	        </figcaption>
             </figure> 
@@ -35,15 +35,18 @@
 	    </td>
 	    <td> 
             <div class="price-wrap"> 
-                <var class="price"><i class="fa fa-rupee-sign" aria-hidden="true"></i> 145</var> 
+                <var class="price"><i class="fa fa-rupee-sign" aria-hidden="true"></i> {{ $wishlist->product->mrp }}</var> 
             </div> <!-- price-wrap .// -->
 	    </td>
 	    <td class="text-right"> 
-            <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip" data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i></a> 
-            <a href="" class="btn btn-outline-danger"> × Remove</a>
+            <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip" data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i> Cart</a> 
+            <form action="/home/wishlist/{{$wishlist->id}}" method="POST">
+            @csrf
+                <button type="submit"  class="btn btn-outline-danger mt-1"> × Remove</button>
+            </form>
 	    </td>
     </tr>
-    
+    @endforeach
     </tbody>
     </table>
     </div> <!-- card.// -->
