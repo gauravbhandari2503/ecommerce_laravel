@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Auth;
 class WishlistController extends Controller
 {
     public function index(){
-
+        if (!Auth::check()) {
+            return view('login');
+        } 
         $wishlists = Wishlist::where('customer_id',Auth::user()->id)->with(['product'])->latest()->paginate(10);
         return view('customer.wishlist', compact('wishlists'))
             ->with('i', (request()->input('page', 1) - 1) * 10);

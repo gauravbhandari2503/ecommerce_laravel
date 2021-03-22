@@ -16,7 +16,7 @@ class Products extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('title');
+            $table->string('title'); 
             $table->foreignId('supplier_id')->constrained('users')->onDelete('cascade');
             $table->integer('mrp');
             $table->string('discount')->nullable();

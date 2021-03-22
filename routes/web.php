@@ -47,10 +47,10 @@ Route::prefix('/home')->group(function(){
 
     Route::get('/cart', [App\Http\Controllers\CartController::class,'index'])->name('cart');
     Route::post('/cart/add/{id}', [App\Http\Controllers\CartController::class,'store'])->name('cartAdd');
-    Route::post('/cart/{id}', [App\Http\Controllers\CartController::class,'destroy'])->name('cartRemove');
+  
     
+    Route::get('/cart/order',[App\Http\Controllers\OrderController::class,'index'])->name('order');
+    Route::post('/cart/order/payment/{id}',[App\Http\Controllers\PaymentController::class,'paymentInfo']);
 
-    Route::post('/cart/payment/{id}',[App\Http\Controllers\PaymentController::class,'paymentInfo'])->name('payment');
- 
-
+    Route::post('/cart/order/placed',[App\Http\Controllers\OrderController::class,'store'])->name('orderplaced');
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 class UserProductController extends Controller
 {
     /**
@@ -13,6 +14,9 @@ class UserProductController extends Controller
      */
     public function index()
     {
+        if (!Auth::check()) {
+            return view('login');
+        } 
         $items = Product::latest()->paginate(5);
 
         return view('customer.index', compact('items'))

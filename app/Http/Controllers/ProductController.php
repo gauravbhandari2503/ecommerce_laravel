@@ -16,7 +16,10 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        if (!Auth::check()) {
+            return view('login');
+        } 
         $products = Product::where('supplier_id',Auth::user()->id)->latest()->paginate(5);
 
         return view('products.index', compact('products'))

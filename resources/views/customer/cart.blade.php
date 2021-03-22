@@ -64,8 +64,9 @@
 					</div>
 				</div>
                 <div class="col-xs-3">
-				<form method="POST" action="/home/cart/payment/{{ $amount }}">
+				<form method="POST" action="{{ route('order') }}">
 					@csrf
+					@method('GET')
                     <button type="submit" class="btn btn-success btn-block">
                         Checkout
                     </button>

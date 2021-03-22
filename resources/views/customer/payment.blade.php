@@ -54,7 +54,10 @@
                 </li>
             </ul>
             <br/>
-            <a href="#" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
+            <form method="POST" action="{{ route('orderplaced') }}">
+                @csrf
+                <button type="submit" class="btn btn-success btn-lg btn-block" role="button">Pay</button>
+            </form>
         </div>
     </div>
 </div>

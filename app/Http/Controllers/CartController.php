@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     public function index(){
+        if (!Auth::check()) {
+            return view('login');
+        } 
+        
         $amount = Cart::where('customer_id',Auth::user()->id)->sum('amount');
         $carts = Cart::where('customer_id',Auth::user()->id)->with(['product'])->latest()->paginate(10);
         return view('customer.cart', compact('carts'))->with('amount',$amount)
@@ -41,11 +45,5 @@ class CartController extends Controller
         }
 
     }
-    public function destroy(Request $request){
-
-        $id = Cart::where('id',$request->id);
-        $id->delete();
-        return redirect()->route('items.index');
-
-    }
+    
 }
