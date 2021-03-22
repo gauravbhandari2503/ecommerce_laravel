@@ -16,7 +16,7 @@
         @csrf
             <button type="submit" class="btn btn-outline-danger"><i class="fas fa-heart"></i>Add To Wishlist</button>
         </form>
-        <form>
+        <form action="/home/cart/add/{{$item->id}}" method="POST">
         @csrf
             <button class="btn btn-outline-success mt-2"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
         </form>

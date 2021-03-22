@@ -7,7 +7,7 @@
 
       <div class="col-lg-3">
 
-        <h1 class="my-4">Shop Name</h1>
+        <h1 class="my-4">RubiCart Shop</h1>
         <div class="list-group">
           <a href="#" class="list-group-item">Category 1</a>
           <a href="#" class="list-group-item">Category 2</a>
@@ -27,7 +27,7 @@
           </ol>
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-              <img class="d-block img-fluid" src="/storage/Banner/banner1.jpeg" alt="First slide">
+              <img class="d-block img-fluid" src="/storage/Banner/banner2.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
               <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
@@ -50,10 +50,10 @@
             @foreach($items as $item)
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="/storage/products/{{ $item->image }}" alt="" ></a>
+                    <a href="{{ route('items.show',$item->id) }}"><img class="card-img-top " src="/storage/products/{{ $item->image }}" alt="" ></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                        <a href="{{ route('items.show',$item->id) }}">{{ $item->title }} </a>
+                        <a class="badge badge-dark" href="{{ route('items.show',$item->id) }}">{{ $item->title }} </a>
                         </h4>
                         <p class="card-text" style="text-decoration:line-through;"><i class="fa fa-rupee-sign" aria-hidden="true"></i>{{ $item->mrp }} </p> <span class="card-text"><i class="fa fa-rupee-sign" aria-hidden="true"></i>{{ $item->mrp=$item->mrp - $item->discount/100*$item->mrp }} </span>
                         <p class="card-text">{{ $item->description }}</p>

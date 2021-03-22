@@ -40,11 +40,17 @@ Route::prefix('dashboard')->middleware('role:Seller')->group(function(){
 
 Route::prefix('/home')->group(function(){
     Route::resource('/items','App\Http\Controllers\UserProductController');
-    Route::get('/cart',function(){
-        return view('customer.cart');
-    });
+    
     Route::get('/wishlist', [App\Http\Controllers\WishlistController::class,'index'])->name('wishlist');
     Route::post('/wishlist/add/{id}', [App\Http\Controllers\WishlistController::class,'store'])->name('wishlistAdd');
     Route::post('/wishlist/{id}', [App\Http\Controllers\WishlistController::class,'destroy'])->name('wishlistRemove');
+
+    Route::get('/cart', [App\Http\Controllers\CartController::class,'index'])->name('cart');
+    Route::post('/cart/add/{id}', [App\Http\Controllers\CartController::class,'store'])->name('cartAdd');
+    Route::post('/cart/{id}', [App\Http\Controllers\CartController::class,'destroy'])->name('cartRemove');
+    
+
+    Route::post('/cart/payment/{id}',[App\Http\Controllers\PaymentController::class,'paymentInfo'])->name('payment');
+ 
 
 });
