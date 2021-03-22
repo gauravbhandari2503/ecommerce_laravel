@@ -12,7 +12,8 @@ class Wishlist extends Model
         'product_id',
     ];
     use HasFactory;
+
     public function product(){
-        return $this->belongsTo(Product::class,'id');
+        return $this->belongsTo(Product::class,'product_id');
     }
 }

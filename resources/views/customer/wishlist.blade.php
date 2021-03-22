@@ -20,22 +20,22 @@
 	        <figcaption class="media-body">
 		    <h6 class="title text-truncate">{{ $wishlist->product->title }} </h6>
 		        <dl class="param param-inline small">
-                    <dt>{{ $wishlist->product->description }} </dt>
-                    <dd>XXL</dd>
+                    <dt>Discount <i class="fas fa-tag"></i> </dt>
+                    <dd>{{ $wishlist->product->discount }} % </dd>
 		        </dl>
 		        <dl class="param param-inline small">
-                    <dt>Stock: </dt>
-                    <dd>{{ $wishlist->product->stock }} </dd>
+                    <dt>Original Price: </dt>
+                    <dd><i class="fa fa-rupee-sign" aria-hidden="true"></i>{{ $wishlist->product->mrp }} </dd>
 		        </dl>
 	        </figcaption>
             </figure> 
 	    </td>
 	    <td> 
-		    <input type="text" class="form-control" disabled value="">
+		    <input type="text" class="form-control" disabled value="@if($wishlist->product->stock > 10) Available @else {{$wishlist->product->stock}} Left @endif">
 	    </td>
 	    <td> 
             <div class="price-wrap"> 
-                <var class="price"><i class="fa fa-rupee-sign" aria-hidden="true"></i> {{ $wishlist->product->mrp }}</var> 
+                <var class="price"><i class="fa fa-rupee-sign" aria-hidden="true"></i> {{ $wishlist->product->mrp=$wishlist->product->mrp - $wishlist->product->discount/100*$wishlist->product->mrp }}</var> 
             </div> <!-- price-wrap .// -->
 	    </td>
 	    <td class="text-right"> 
@@ -50,5 +50,6 @@
     </tbody>
     </table>
     </div> <!-- card.// -->
+    {!! $wishlists->links() !!}
 </div> 
 @endsection
