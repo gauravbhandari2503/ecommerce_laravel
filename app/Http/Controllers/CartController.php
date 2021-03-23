@@ -27,6 +27,9 @@ class CartController extends Controller
             return redirect()->back()->with('message','Item is out of stock');
         }
         if($cart){
+            if($product->stock-1 < $cart->quantity){
+                return redirect()->back()->with('message','Limited quantity available ');
+            }
             $cart->update([
                 'quantity' => $cart->quantity+1,
             ]);

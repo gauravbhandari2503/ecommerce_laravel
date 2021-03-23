@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\OrderInitialized;
 
 class OrderController extends Controller
 {
@@ -38,6 +40,8 @@ class OrderController extends Controller
                 'stock' => $product->stock - $cart->quantity,
             ]);
         }
+        $user = User::where('id',Auth::user()->id)->first();
+        $user->notify(new OrderInitialized());
         return view('customer.orderplaced');
     }
 

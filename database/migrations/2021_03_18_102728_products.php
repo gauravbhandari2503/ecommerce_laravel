@@ -20,7 +20,7 @@ class Products extends Migration
             $table->integer('mrp');
             $table->string('discount')->nullable()->comment("in percentage");
             $table->string('description')->nullable();
-            $table->string('stock')->nullable();
+            $table->unsignedBigInteger('stock')->nullable();
             $table->string('image')->default('product.jpg');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();

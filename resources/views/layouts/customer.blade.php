@@ -11,6 +11,7 @@
     <title>E-commerce</title>
 
     <!-- Bootstrap core CSS -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->

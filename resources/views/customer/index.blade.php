@@ -1,7 +1,7 @@
 @extends('layouts.customer')
 @section('content')
   <!-- Page Content -->
-  <div class="container mt-5">
+  <div class="container mt-4">
 
     <div class="row">
 
@@ -30,10 +30,10 @@
               <img class="d-block img-fluid" src="/storage/Banner/banner2.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+              <img class="d-block img-fluid" src="/storage/Banner/banner1.jpeg" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+              <img class="d-block img-fluid" src="/storage/Banner/banner2.jpg" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
