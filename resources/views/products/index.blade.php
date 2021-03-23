@@ -32,7 +32,6 @@
             <th>Discount</th>
             <th>Description</th>
             <th>Stock</th>
-            <th>Best Seller</th>
             <th>Options</th>
         </tr>
         @foreach ($products as $product)
@@ -43,7 +42,6 @@
                 <td>{{ $product->discount }}</td>
                 <td>{{ $product->description }}</td>
                 <td>{{ $product->stock }}</td>
-                <td>{{ $product->best_seller }}</td>
                 <td>
                     <form action="{{ route('products.destroy',$product->id) }}" method="POST">
 

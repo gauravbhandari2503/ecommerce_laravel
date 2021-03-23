@@ -15,14 +15,14 @@ class Orders extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignId('customer_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->string('payment_id');
-            $table->integer('pricePerPiece');
+            $table->integer('price_per_piece');
             $table->integer('amount');
             $table->string('status')->default('Intialized');
             $table->date('shipped_date');
+            $table->timestamps();
         });
     }
 

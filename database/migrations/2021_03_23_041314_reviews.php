@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Wishlists extends Migration
+class Reviews extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class Wishlists extends Migration
      */
     public function up()
     {
-        Schema::create('wishlists', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->timestamps();
+            $table->string('comment');
+            $table->integer('rating');
         });
     }
 
@@ -28,6 +29,6 @@ class Wishlists extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wishlists');
+        Schema::dropIfExists('reviews');
     }
 }

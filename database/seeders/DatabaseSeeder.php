@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 use App\Models\Category;
+use App\Models\Status;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -96,5 +97,33 @@ class DatabaseSeeder extends Seeder
         foreach ($categories as $category) {
             Category::create($category);
         }
+
+        $statuses = [
+            [
+                'id'   => 1,
+                'status' => 'Initialized',
+            ],
+            [
+                'id'    => 2,
+                'status' => 'Placed',
+            ],
+            [
+                'id'    => 3,
+                'status' => 'Shipped',
+            ],
+            [
+                'id'    => 4,
+                'status' => 'Completed',
+            ],
+            [
+                'id'    => 5,
+                'status' => 'Cancelled',
+            ],
+        ];
+
+        foreach ($statuses as $status) {
+            Status::create($status);
+        }
+
     }
 } 

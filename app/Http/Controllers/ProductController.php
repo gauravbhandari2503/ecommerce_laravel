@@ -20,7 +20,7 @@ class ProductController extends Controller
         if (!Auth::check()) {
             return view('login');
         } 
-        $products = Product::where('supplier_id',Auth::user()->id)->latest()->paginate(5);
+        $products = Product::where('user_id',Auth::user()->id)->latest()->paginate(5);
 
         return view('products.index', compact('products'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -66,9 +66,9 @@ class ProductController extends Controller
             'discount' =>  $request['discount'],
             'description' =>  $request['description'],
             'stock' =>  $request['stock'],
-            'supplier_id' => $userData->id,
             'image' => $imageName,
-            'cat_id' => $request['subcategory'],
+            'category_id' => $request['subcategory'],
+            'user_id' => $userData->id,
         ]);
 
         return redirect()->route('products.index')
@@ -134,7 +134,7 @@ class ProductController extends Controller
             'discount' =>  $request['discount'],
             'description' =>  $request['description'],
             'stock' =>  $request['stock'],
-            'supplier_id' => $userData->id,
+            'user_id' => $userData->id,
             'image' => $imageName
         ]);
     

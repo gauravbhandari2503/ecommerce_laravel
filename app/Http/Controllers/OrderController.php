@@ -14,19 +14,17 @@ class OrderController extends Controller
         if (!Auth::check()) {
             return view('login');
         } 
-        $amount = Cart::where('customer_id',Auth::user()->id)->sum('amount');
         $orders = Cart::where('customer_id',Auth::user()->id)->with(['product'])->latest()->paginate(10);
-        return view('orders.index', compact('orders'))->with('amount',$amount)
-            ->with('i', (request()->input('page', 1) - 1) * 10);
+        return view('orders.index', compact('orders'))->with('i', (request()->input('page', 1) - 1) * 10);
 
     }
 
     public function store(){
-        $carts = Cart::where('customer_id',Auth::user()->id)->with(['product']);
-        dd($carts);
-        foreach($carts as $cart){
-            Order::create();
-        }
+        // $carts = Cart::where('customer_id',Auth::user()->id)->with(['product']);
+        // dd($carts);
+        // foreach($carts as $cart){
+        //     Order::create();
+        // }
         return view('customer.orderplaced');
     }
 

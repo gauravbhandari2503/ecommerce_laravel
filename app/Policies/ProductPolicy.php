@@ -31,7 +31,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product)
     {
-        return $user->id === $product->supplier_id
+        return $user->id === $product->user_id
                 ? Response::allow()
                 : Response::deny('You do not own this post.');
     }
@@ -56,7 +56,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product)
     {
-        return $user->id === $product->supplier_id
+        return $user->id === $product->user_id
                 ? Response::allow()
                 : Response::deny('You do not own this post.');
     }
@@ -70,7 +70,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product)
     {
-        return $user->id === $product->supplier_id
+        return $user->id === $product->user_id
                 ? Response::allow()
                 : Response::deny('You do not own this post.');
     }
