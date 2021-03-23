@@ -31,7 +31,7 @@
             </figure> 
 	    </td>
 	    <td> 
-		    <input type="text" class="form-control" disabled value="@if($wishlist->product->stock > 10) Available @else {{$wishlist->product->stock}} Left @endif">
+		    <input type="text" class="form-control" disabled value="@if($wishlist->product->stock > 10) Available @elseif($wishlist->product->stock === '0') Out Of Stock  @else {{$wishlist->product->stock}} Left @endif">
 	    </td>
 	    <td> 
             <div class="price-wrap"> 
@@ -39,7 +39,10 @@
             </div> <!-- price-wrap .// -->
 	    </td>
 	    <td class="text-right"> 
-            <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip" data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i> Cart</a> 
+            <form action="/home/cart/add/{{$wishlist->product->id}}" method="POST">
+            @csrf
+                <button type="submit" class="btn btn-outline-success" ><i class="fa fa-heart"></i> Cart</button> 
+            </form>
             <form action="/home/wishlist/{{$wishlist->id}}" method="POST">
             @csrf
                 <button type="submit"  class="btn btn-outline-danger mt-1"> × Remove</button>
@@ -51,5 +54,11 @@
     </table>
     </div> <!-- card.// -->
     {!! $wishlists->links() !!}
+    @if($message = Session::get('message'))
+        <div class="alert alert-danger">
+            <p>{{$message}}</p>
+        </div>
+    @endif
 </div> 
-@endsection
+    
+    @endsection

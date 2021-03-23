@@ -20,8 +20,7 @@ class Orders extends Migration
             $table->string('payment_id');
             $table->integer('price_per_piece');
             $table->integer('amount');
-            $table->string('status')->default('Intialized');
-            $table->date('shipped_date');
+            $table->date('shipped_date')->nullable();
             $table->timestamps();
         });
     }

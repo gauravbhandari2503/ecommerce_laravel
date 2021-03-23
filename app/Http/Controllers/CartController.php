@@ -13,7 +13,7 @@ class CartController extends Controller
         if (!Auth::check()) {
             return view('login');
         } 
-        $carts = Cart::where('customer_id',Auth::user()->id)->with(['product'])->latest()->paginate(10);
+        $carts = Cart::where('customer_id',Auth::user()->id)->with(['product'])->latest()->paginate();
         return view('customer.cart', compact('carts'))->with('i', (request()->input('page', 1) - 1) * 10);
 
     }
@@ -21,6 +21,11 @@ class CartController extends Controller
     public function store(Request $request){
         
         $cart = Cart::where('customer_id',Auth::user()->id)->where('product_id',$request->id)->first();
+        $product = Product::where('id',$request->id)->first();
+
+        if($product->stock === '0'){
+            return redirect()->back()->with('message','Item is out of stock');
+        }
         if($cart){
             $cart->update([
                 'quantity' => $cart->quantity+1,

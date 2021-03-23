@@ -15,7 +15,7 @@ class Order extends Model
         'quantity',
         'amount',
         'payment_id',
-        'pricePerPiece',
+        'price_per_piece',
         'status',
         'shipped_date'
     ];
@@ -24,6 +24,9 @@ class Order extends Model
     {
         return $this->belongsTo(Product::class,'product_id');
     }
-    
+
+    public function statuses(){
+        return $this->belongsToMany(Status::class);
+    }
     
 }
