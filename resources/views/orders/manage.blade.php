@@ -43,7 +43,7 @@
                 <td>{{ $order->product->title }}</td>
                 <td>{{ $order->customer->name }}</td>
                 <td>{{ $order->created_at }}</td>
-                <td>@if($order->shipped_date === NULL) Not Yet  @else {{ $order->shipped_date }} @endif
+                <td>@if($order->shipped_date === NULL) Not Yet  @else {{ $order->shipped_date }} @endif</td>
                 <td>@foreach($order->statuses as $name) {{ $name->status }} @endforeach</td>
                 <td>{{ $order->quantity}}</td>
     

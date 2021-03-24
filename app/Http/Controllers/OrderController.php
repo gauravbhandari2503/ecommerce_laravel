@@ -57,6 +57,18 @@ class OrderController extends Controller
         return view('orders.manage', compact('orders'));
     }
 
+    
+    public function userOrders(){
+        $orders = Order::where('customer_id',Auth::user()->id)->with('product')->with('statuses')->latest()->get();
+        return view('customer.orders',compact('orders'));
+    }
+
+    public function userOrder($orderId){
+        $order = Order::where('id',$orderId)->with('product')->with('statuses')->first();
+        return view('customer.view-order',compact('order'));
+    }
+
+
     public function orderStatus(Request $request , $orderId){
 
         $order = Order::where('id',$orderId)->first();
@@ -96,6 +108,28 @@ class OrderController extends Controller
         break;
         }
     }
-    
 
+    public function orderCancelRequest($orderId){
+        $order = Order::where('id',$orderId)->with('product')->with('statuses')->first();
+        foreach($order->statuses as $currentStatus){
+            $currentStatus->status; 
+        }
+
+        if($currentStatus->id === 3){
+            return redirect()->back()->with('error', 'An order cannot be cancelled once it has been Shipped.');
+        }
+        else{
+            //mail to user
+            Auth::user()->notify(new OrderCancelled);
+            //mail to seller
+            $product = Product::where('id',$order->product->id)->first();
+            $product->update([
+                'stock' => $product->stock + $order->quantity,
+            ]);
+            $seller = User::where('id',$product->user_id)->first();
+            $seller->notify(new OrderCancelled());
+            $order->statuses()->update(['status_id' => 5]);
+            return redirect()->back()->with('success', 'Order Cancellation request has now generated. Further process will be notified via mail. Thanks & Regards : RubiCart ');
+        }
+    }
 }

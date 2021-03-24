@@ -29,7 +29,7 @@ class OrderCompleted extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -41,9 +41,10 @@ class OrderCompleted extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                ->greeting('Hello!')
+                ->line('One of your order has Completed ! Please Write us a review for the product')
+                ->action('Give a feedback', url('/home/orders'))
+                ->line('Thank you for using our application!');
     }
 
     /**

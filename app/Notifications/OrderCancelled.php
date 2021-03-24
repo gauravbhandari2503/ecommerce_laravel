@@ -29,7 +29,7 @@ class OrderCancelled extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -41,8 +41,8 @@ class OrderCancelled extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->greeting('Hello!')
+                    ->line('One of your order has been cancelled !')
                     ->line('Thank you for using our application!');
     }
 
