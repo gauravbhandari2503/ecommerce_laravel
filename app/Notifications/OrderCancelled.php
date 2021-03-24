@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class OrderInitialized extends Notification
+class OrderCancelled extends Notification
 {
     use Queueable;
 
@@ -29,7 +29,7 @@ class OrderInitialized extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail'];
     }
 
     /**
@@ -41,8 +41,8 @@ class OrderInitialized extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Your order has been received. Order Confirmation will be given to you via mail.')
-                    ->action('More Shopping', url('/home/items'))
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
 

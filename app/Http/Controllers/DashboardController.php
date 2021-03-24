@@ -10,9 +10,6 @@ use DB;
 class DashboardController extends Controller
 {
     public function index(){
-        if (!Auth::check()) {
-            return view('auth.login');
-        } 
         return view('seller.dashboard');
     }
 

@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     public function index(){
-        if (!Auth::check()) {
-            return view('login');
-        } 
+        
         $carts = Cart::where('customer_id',Auth::user()->id)->with(['product'])->latest()->paginate();
         return view('customer.cart', compact('carts'))->with('i', (request()->input('page', 1) - 1) * 10);
 

@@ -20,7 +20,7 @@ class Orders extends Migration
             $table->string('payment_id');
             $table->integer('price_per_piece');
             $table->integer('amount');
-            $table->date('shipped_date')->nullable();
+            $table->timestamp('shipped_date')->nullable();
             $table->timestamps();
         });
     }

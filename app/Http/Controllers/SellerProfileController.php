@@ -11,9 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class SellerProfileController extends Controller
 {
     public function index(){
-        if (!Auth::check()) {
-            return view('login');
-        } 
+        
         $usersInfo = DB::table('users')->where('email',Auth::user()->email)->first();
         return view('seller.profilepage',['users' => $usersInfo]);
     }

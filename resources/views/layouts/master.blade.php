@@ -47,7 +47,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{{ url('/dashboard/products') }}">Manage Products</a>
-          <a class="dropdown-item" href="#">Manage Order</a>
+          <a class="dropdown-item" href="{{ url('/dashboard/orders') }}">Manage Order</a>
           <a class="dropdown-item" href="#">View Orders</a>
           <a class="dropdown-item" href="#">View Users</a>
           <a class="dropdown-item" href="{{ route('logout') }}"

@@ -14,9 +14,7 @@ class UserProductController extends Controller
      */
     public function index()
     {
-        if (!Auth::check()) {
-            return view('login');
-        } 
+        
         $items = Product::latest()->paginate(5);
 
         return view('customer.index', compact('items'))

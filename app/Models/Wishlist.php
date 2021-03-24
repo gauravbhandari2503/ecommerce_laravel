@@ -7,10 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wishlist extends Model
 {   
-    protected $fillable = [
-        'customer_id',
-        'product_id',
-    ];
+    protected $guarded = ['id', 'created_at','updated_at'];
+
     use HasFactory;
 
     public function product(){

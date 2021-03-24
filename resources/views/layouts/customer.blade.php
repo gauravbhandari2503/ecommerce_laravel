@@ -45,7 +45,7 @@
             <a class="nav-link" href="{{ url('/home/cart') }}">Cart</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Orders</a>
+            <a class="nav-link" href="{{ url('/home/orders') }}">Orders</a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="#">Notification <span class="badge badge-light" >1</span></a>
