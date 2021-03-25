@@ -56,7 +56,12 @@ Route::prefix('/home')->middleware('auth')->group(function(){
 
     Route::post('cart/order/placed',[App\Http\Controllers\OrderController::class,'store'])->name('orderplaced');
 
-    Route::get('/orders',[App\Http\Controllers\OrderController::class,'userOrders']);
+    Route::get('/orders',[App\Http\Controllers\OrderController::class,'userOrders'])->name('user.orders');
     Route::get('/orders/cancel/{orderId}',[App\Http\Controllers\OrderController::class,'orderCancelRequest']);
     Route::get('/orders/item/{orderId}',[App\Http\Controllers\OrderController::class,'userOrder']);
+
+    Route::get('/item/feedback/{productId}',[App\Http\Controllers\ReviewController::class,'index']);
+    Route::post('feedback/{productId}',[App\Http\Controllers\ReviewController::class,'reviewStore'])->name('feedback');
+
+    Route::post('product/search',[App\Http\Controllers\ProductSearchController::class,'index'])->name('search');
 });

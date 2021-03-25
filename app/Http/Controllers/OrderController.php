@@ -12,7 +12,7 @@ use App\Notifications\OrderInitialized;
 use App\Notifications\OrderCreated;
 use App\Notifications\OrderPlaced;
 use App\Notifications\OrderShipped;
-use App\Notifications\OrderOrderCompleted;
+use App\Notifications\OrderCompleted;
 use App\Notifications\OrderCancelled;
 
 class OrderController extends Controller
@@ -57,17 +57,15 @@ class OrderController extends Controller
         return view('orders.manage', compact('orders'));
     }
 
+    public function userOrder($orderId){
+        $order = Order::where('id',$orderId)->with('product')->with('statuses')->first();
+        return view('customer.view-order',compact('order'));
+    }
     
     public function userOrders(){
         $orders = Order::where('customer_id',Auth::user()->id)->with('product')->with('statuses')->latest()->get();
         return view('customer.orders',compact('orders'));
     }
-
-    public function userOrder($orderId){
-        $order = Order::where('id',$orderId)->with('product')->with('statuses')->first();
-        return view('customer.view-order',compact('order'));
-    }
-
 
     public function orderStatus(Request $request , $orderId){
 

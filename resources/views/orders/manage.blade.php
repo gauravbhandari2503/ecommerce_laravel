@@ -51,6 +51,7 @@
                 <td>
                     <form action="/dashboard/orders/{{ $order->id }}" method="POST">
                         @csrf
+                        @if($name->id === 1)
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="status" id="Placed" value="2">
                             <label class="form-check-label" for="Placed">Placed</label>
@@ -70,6 +71,35 @@
                         <button type="submit" class="btn btn-info">
                             Update
                         </button>
+                        @elseif($name->id === 2)
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="Shipped" value="3">
+                            <label class="form-check-label" for="Shipped">Shipped</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="Completed" value="4" >
+                            <label class="form-check-label" for="Completed">Completed</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="Cancelled" value="5" >
+                            <label class="form-check-label" for="Cancelled">Cancelled</label>
+                        </div>
+                        <button type="submit" class="btn btn-info">
+                            Update
+                        </button>
+                        @elseif($name->id === 3)
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="Completed" value="4" >
+                            <label class="form-check-label" for="Completed">Completed</label>
+                        </div>
+                        <button type="submit" class="btn btn-info">
+                            Update
+                        </button>
+                        @elseif($name->id === 4)
+                        <a class="btn btn-success">Dispatched</a>
+                        @else
+                        <a class="btn btn-danger">Cancelled</a>
+                        @endif
                     </form>
                 </td>
             </tr>

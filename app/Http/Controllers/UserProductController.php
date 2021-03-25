@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 class UserProductController extends Controller
 {
@@ -14,9 +15,7 @@ class UserProductController extends Controller
      */
     public function index()
     {
-        
-        $items = Product::latest()->paginate(5);
-
+        $items = Product::latest()->with(['reviews'])->paginate(5);
         return view('customer.index', compact('items'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }

@@ -58,38 +58,17 @@
                         <p class="card-text" style="text-decoration:line-through;"><i class="fa fa-rupee-sign" aria-hidden="true"></i>{{ $item->mrp }} </p> <span class="card-text"><i class="fa fa-rupee-sign" aria-hidden="true"></i>{{ $item->mrp=$item->mrp - $item->discount/100*$item->mrp }} </span>
                         <p class="card-text">{{ $item->description }}</p>
                     </div>
-                    @php
-                      if($item->reviews->first())
-                      {
-                        $count = 0;
-                        $rating = 0;
-                        $average = 0;
-                        foreach($item->reviews as $review){
-                          $rating += $review->rating;
-                          $count = $count + 1 ;
-                        }
-                        $average = ceil($rating / $count);
-                      }
-                      else{
-                       $average = 1;
-                      }
-                    @endphp
+                    
                     <div class="card-footer">
-                        <small class="text-muted">
-                        @for($i=1;$i<=5;$i++)
-                          @if($i<=$average)
-                          &#9733;
-                          @else
-                          &#9734;
-                          @endif
-                        @endfor
-                        </small>
+                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                     </div>
                     </div>
                 </div>
             @endforeach
+            @if(!$items->first())
+                <img src="https://www.plant4u.in/images/no-product-found.png">
+            @endif
         </div>
-        {!! $items->links() !!}
         <!-- /.row -->
 
       </div>

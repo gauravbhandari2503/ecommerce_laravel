@@ -36,16 +36,20 @@
         <td>{{ $order->quantity }}</td>
         <td><i class="fa fa-rupee-sign" aria-hidden="true"></i> {{ $order->amount }}</td>
         <td>
+        @if($name->id===4)
+            <a type="submit" href="/home/item/feedback/{{ $order->product->id }}" class="btn btn-warning"><i class="fas fa-star"></i> Give Feedback</a>
+        @endif
         @if($name->id === 4 || $name->id === 5)
-                <a type="submit" href="/home/orders/item/{{ $order->id }}" class="btn btn-primary"><i class="fas fa-eye"></i> View</a>
+            <a type="submit" href="/home/orders/item/{{ $order->id }}" class="btn btn-primary mt-1"><i class="fas fa-eye"></i> View</a>
         @else
-                <a type="submit" href="/home/orders/item/{{ $order->id }}" class="btn btn-primary"><i class="fas fa-eye"></i> View</a>
-                <a type="submit" href="/home/orders/cancel/{{ $order->id }}" class="btn btn-danger mt-1">x Cancel Order</a>
+            <a type="submit" href="/home/orders/item/{{ $order->id }}" class="btn btn-primary"><i class="fas fa-eye"></i> View</a>
+            <a type="submit" href="/home/orders/cancel/{{ $order->id }}" class="btn btn-danger mt-1">x Cancel Order</a>
         @endif    
         </td>
         </tr>
     @endforeach
     </tbody>
     </table>
+    
 </div>
 @endsection
