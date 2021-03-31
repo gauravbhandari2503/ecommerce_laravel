@@ -15,9 +15,9 @@ class UserProductController extends Controller
      */
     public function index()
     {
-        $items = Product::latest()->with(['reviews'])->paginate(5);
+        $items = Product::latest()->with(['reviews'])->paginate(6);
         return view('customer.index', compact('items'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 6);
     }
 
     /**

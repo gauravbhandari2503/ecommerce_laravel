@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -15,5 +18,13 @@ class CategoryController extends Controller
         return response()->json([
             'subcategories' => $subcategories
         ]);
+    }
+
+    public function viewByCategory($name){
+        $categories = Category::with('children')->where('name', $name)->get();
+        if (!$categories->count()) {
+            return abort(404);
+        }
+        return view('customer.category', compact('categories'));
     }
 }

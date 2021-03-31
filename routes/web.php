@@ -36,7 +36,6 @@ Route::prefix('dashboard')->middleware(['auth','role:Seller'])->group(function()
     Route::resource('/products','App\Http\Controllers\ProductController');
     Route::get('/orders',[App\Http\Controllers\OrderController::class,'orders'])->name('orders.manage');
     Route::post('orders/{orderId}',[App\Http\Controllers\OrderController::class,'orderStatus']);
-    Route::post('dashboard/products/create',[App\Http\Controllers\CategoryController::class,'index']);
     Route::post('dashboard/products/create',[App\Http\Controllers\CategoryController::class,'subCat'])->name('subcat');
 });
 
@@ -48,6 +47,8 @@ Route::prefix('/home')->middleware('auth')->group(function(){
     Route::post('wishlist/{id}', [App\Http\Controllers\WishlistController::class,'destroy'])->name('wishlistRemove');
 
     Route::get('cart', [App\Http\Controllers\CartController::class,'index'])->name('cart');
+    Route::get('cart/inc/{cartId}',[App\Http\Controllers\CartController::class,'increaseQuantity']);
+    Route::get('cart/dec/{cartId}',[App\Http\Controllers\CartController::class,'decreaseQuantity']);
     Route::post('cart/add/{id}', [App\Http\Controllers\CartController::class,'store'])->name('cartAdd');
   
     
@@ -64,4 +65,5 @@ Route::prefix('/home')->middleware('auth')->group(function(){
     Route::post('feedback/{productId}',[App\Http\Controllers\ReviewController::class,'reviewStore'])->name('feedback');
 
     Route::post('product/search',[App\Http\Controllers\ProductSearchController::class,'index'])->name('search');
+    Route::get('category/{categoryName}',[App\Http\Controllers\CategoryController::class,'viewByCategory'])->name('categorySearch');
 });

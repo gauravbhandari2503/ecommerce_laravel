@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $categories = Category::whereNull('parent_id')->get();
+        $shareData = array(
+            'categories' => $categories
+        );
+        view()->share('shareData',$shareData);
+        
         Paginator::useBootstrap();
     }
 }

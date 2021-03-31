@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+<div class="container">
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -39,6 +40,13 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
+                    <strong>Specification:</strong>
+                    <textarea class="form-control" style="height:50px" name="specification"
+                        placeholder="Enter Specification"></textarea>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
                     <strong>Stock:</strong>
                     <input type="number" name="stock" class="form-control" placeholder="Enter Available Stock Of Product">
                 </div>
@@ -68,14 +76,18 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Subcategory :</strong>
-                    <select name="subcategory" id="subcategory" class="form-control browser-default custom-select ">
-                        
+                    <select name="subcategory" id="subcategory" class="form-control browser-default custom-select " style="display:none">
+                    <option value="">--Select any category--</option>
                     </select>
                 </div>
             </div>
-
-            
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <select name="childcategory" id="childcategory" class="form-control browser-default custom-select " style="display:none" >
+                    <option value="">--Select any category--</option>
+                    </select>
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Image:</strong>
@@ -86,11 +98,12 @@
                 <button type="submit" class="btn btn-primary">Add</button>
             </div>
         </div>
-
+    <div>
     </form>
     <script type="text/javascript">
     $(document).ready(function () {
         $('#category').on('change',function(e) {
+        $('#subcategory').css("display", "block");
         var cat_id = e.target.value;
         $.ajax({
             url:"{{ route('subcat') }}",
@@ -103,6 +116,24 @@
             $('#subcategory').empty();
             $.each(data.subcategories[0].child,function(index,child){
             $('#subcategory').append('<option value="'+child.id+'">'+child.name+'</option>');
+            })
+            }
+        })
+    });
+    $('#subcategory').on('change',function(e) {
+        $('#childcategory').css("display", "block");
+        var cat_id = e.target.value;
+        $.ajax({
+            url:"{{ route('subcat') }}",
+            type:"POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                cat_id: cat_id
+            },
+        success:function (data) {
+            $('#childcategory').empty();
+            $.each(data.subcategories[0].child,function(index,child){
+            $('#childcategory').append('<option value="'+child.id+'">'+child.name+'</option>');
             })
             }
         })

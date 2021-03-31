@@ -49,7 +49,6 @@
           <a class="dropdown-item" href="{{ url('/dashboard/products') }}">Manage Products</a>
           <a class="dropdown-item" href="{{ url('/dashboard/orders') }}">Manage Order</a>
           <a class="dropdown-item" href="#">View Orders</a>
-          <a class="dropdown-item" href="#">View Users</a>
           <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">

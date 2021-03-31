@@ -47,9 +47,10 @@ class ProductController extends Controller
             'mrp' => 'required',
             'discount' => 'required',
             'description' => 'required',
+            'specification' => 'required',
             'stock' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg',
-            'subcategory' => 'required','id'
+            'childcategory' => 'required','id'
         ]);
 
         $userData = Auth::user();
@@ -62,9 +63,10 @@ class ProductController extends Controller
             'mrp' =>  $request['mrp'],
             'discount' =>  $request['discount'],
             'description' =>  $request['description'],
+            'specification' =>  $request['specification'],
             'stock' =>  $request['stock'],
             'image' => $imageName,
-            'category_id' => $request['subcategory'],
+            'category_id' => $request['childcategory'],
             'user_id' => $userData->id,
         ]);
 

@@ -1,14 +1,23 @@
 @extends('layouts.customer')
 @section('content')
   <!-- Page Content -->
-  <div class="container-fluid mt-4">
+  <div class="container mt-4">
 
     <div class="row">
 
-      
+      <div class="col-lg-3">
+
+        <h1 class="my-4">RubiCart Shop</h1>
+        <div class="list-group">
+          <a href="#" class="list-group-item">Category 1</a>
+          <a href="#" class="list-group-item">Category 2</a>
+          <a href="#" class="list-group-item">Category 3</a>
+        </div>
+
+      </div>
       <!-- /.col-lg-3 -->
 
-      <div class="col-lg-12">
+      <div class="col-lg-9">
 
         <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
           <ol class="carousel-indicators">
@@ -21,7 +30,7 @@
               <img class="d-block img-fluid" src="/storage/Banner/banner2.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="/storage/Banner/banner2.jpg" alt="Second slide">
+              <img class="d-block img-fluid" src="/storage/Banner/banner1.jpeg" alt="Second slide">
             </div>
             <div class="carousel-item">
               <img class="d-block img-fluid" src="/storage/Banner/banner2.jpg" alt="Third slide">
@@ -38,7 +47,11 @@
         </div>
 
         <div class="row">
-            @foreach($items as $item)
+            @foreach($categories as $category)
+            @if(!$category->products->first())
+                <img src="https://www.plant4u.in/images/no-product-found.png">
+            @endif
+                @foreach($category->products as $item)
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
                     <a href="{{ route('items.show',$item->id) }}"><img class="card-img-top " src="/storage/products/{{ $item->image }}" alt="" ></a>
@@ -49,38 +62,16 @@
                         <p class="card-text" style="text-decoration:line-through;"><i class="fa fa-rupee-sign" aria-hidden="true"></i>{{ $item->mrp }} </p> <span class="card-text"><i class="fa fa-rupee-sign" aria-hidden="true"></i>{{ $item->mrp=$item->mrp - $item->discount/100*$item->mrp }} </span>
                         <p class="card-text">{{ $item->description }}</p>
                     </div>
-                    @php
-                      if($item->reviews->first())
-                      {
-                        $count = 0;
-                        $rating = 0;
-                        $average = 0;
-                        foreach($item->reviews as $review){
-                          $rating += $review->rating;
-                          $count = $count + 1 ;
-                        }
-                        $average = ceil($rating / $count);
-                      }
-                      else{
-                       $average = 1;
-                      }
-                    @endphp
+                    
                     <div class="card-footer">
-                        <small class="text-muted">
-                        @for($i=1;$i<=5;$i++)
-                          @if($i<=$average)
-                          &#9733;
-                          @else
-                          &#9734;
-                          @endif
-                        @endfor
-                        </small>
+                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                     </div>
                     </div>
                 </div>
+                @endforeach
             @endforeach
+            
         </div>
-        {!! $items->links() !!}
         <!-- /.row -->
 
       </div>

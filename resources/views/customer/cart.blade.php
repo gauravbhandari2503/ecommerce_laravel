@@ -4,12 +4,16 @@
 	$amount = 0
 @endphp
 <!------ Include the above in your HEAD tag ---------->
+
+@if(!$carts->first())
+	<h1 class="mt-5 text-center display-1"> Cart is Empty </h1>
+@else
 <div class="col-xs-6 float-right mt-5 mr-2">
     <a type="button" class="btn btn-primary btn-sm btn-block " href="{{ url('/home/items') }}">
         <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
     </a>
 </div>
-<div class="container mt-5 float-right">
+<div class="container mt-5 p-5 float-right">
 	<div class="row">
 		<div class="col-xs-8">
 			<div class="panel panel-info">
@@ -28,19 +32,16 @@
 							<div class="col-xs-2"><img class="img-responsive" src="">
 							</div>
 							<div class="col-xs-4 ml-1">
-								<h4 class="product-name"><strong>{{ $cart->product->title }}</strong></h4><h4><small>{{ $cart->product->description }}</small></h4>
+								<h4 class="product-name"><strong>{{ $cart->product->title }}</strong></h4>
 							</div>
 							<div class="col-xs-6">
 								<div class="col-xs-6 text-right">
 									<h6><strong><i class="fa fa-rupee-sign" aria-hidden="true"></i> {{ $cart->product->mrp=$cart->product->mrp - $cart->product->discount/100*$cart->product->mrp }} <span class="text-muted">x</span></strong></h6>
 								</div>
-								<div class="col-xs-4">
-									<input type="text" class="form-control input-sm" value="{{ $cart->quantity }}" disabled>
-								</div>
-								<div class="col-xs-2">
-									<button type="button" class="btn btn-link btn-xs">
-										<span class="glyphicon glyphicon-trash"> </span>
-									</button>
+								<div class="col-xs-6 mt-3 ">
+									<a class="btn btn-danger" href="cart/dec/{{$cart->id}}" type="submit">-</a>
+									<input type="text" class="input-sm ml-1" value="{{ $cart->quantity }}" disabled>
+									<a class="btn btn-success" href="cart/inc/{{$cart->id}}" type="submit">+</a>
 								</div>
 							</div>
 						</div>
@@ -80,5 +81,11 @@
 			</div>
 		</div>
 	</div>
+	@if ($message = Session::get('message'))
+        <div class="alert alert-danger">
+            <p>{{$message}}</p>
+        </div>
+    @endif
 </div>
+@endif
 @endsection

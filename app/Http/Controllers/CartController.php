@@ -43,5 +43,43 @@ class CartController extends Controller
         }
 
     }
+
+    public function increaseQuantity($cartId){
+        $cart = Cart::where('id',$cartId)->first();
+        $product = Product::where('id',$cart->product_id)->first();
+        if($product->stock === '0'){
+            return redirect()->back()->with('message','Item is out of stock');
+        }
+        if($cart){
+            if($product->stock-1 < $cart->quantity){
+                return redirect()->back()->with('message','Limited quantity available ');
+            }
+            $cart->update([
+                'quantity' => $cart->quantity+1,
+            ]);
+            return redirect()->route('cart');
+        }
+    }
+
+    public function decreaseQuantity($cartId){
+        $cart = Cart::where('id',$cartId)->first();
+        $product = Product::where('id',$cart->product_id)->first();
+        if($product->stock === '0'){
+            return redirect()->back()->with('message','Item is out of stock');
+        }
+        if($cart){
+            if($product->stock-1 < $cart->quantity){
+                return redirect()->back()->with('message','Limited quantity available ');
+            }
+            $cart->update([
+                'quantity' => $cart->quantity-1,
+            ]);
+            if($cart->quantity === 0){
+                $cart->delete();
+                return redirect()->back()->with('message','Cart is now empty');
+            }
+            return redirect()->route('cart');
+        }
+    }
     
 }
