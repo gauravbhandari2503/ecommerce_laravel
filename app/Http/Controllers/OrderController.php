@@ -42,6 +42,7 @@ class OrderController extends Controller
             $product = Product::where('id',$cart->product_id)->first();
             $product->update([
                 'stock' => $product->stock - $cart->quantity,
+                'total_orders' => $product->total_orders + 1,
             ]);
             $seller = User::where('id',$product->user_id)->first();
             $seller->notify(new OrderCreated());
@@ -97,6 +98,11 @@ class OrderController extends Controller
                 break;
             case 5:
                 $order->statuses()->update(['status_id' => 5]);
+                $product = Product::where('id',$order->product->id)->first();
+                $product->update([
+                    'stock' => $product->stock + $order->quantity,
+                    'total_orders' => $product->total_orders - 1,
+                ]);
                 $user->notify(new OrderCancelled());
                 return redirect()->route('orders.manage')
                     ->with('success', 'Order Status changed to Cancelled.');
@@ -124,6 +130,7 @@ class OrderController extends Controller
             $product = Product::where('id',$order->product->id)->first();
             $product->update([
                 'stock' => $product->stock + $order->quantity,
+                'total_orders' => $product->total_orders - 1,
             ]);
             $seller = User::where('id',$product->user_id)->first();
             $seller->notify(new OrderCancelled());

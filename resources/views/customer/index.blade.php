@@ -66,15 +66,18 @@
                       }
                     @endphp
                     <div class="card-footer">
-                        <small class="text-muted">
-                        @for($i=1;$i<=5;$i++)
-                          @if($i<=$average)
-                          &#9733;
-                          @else
-                          &#9734;
-                          @endif
-                        @endfor
-                        </small>
+                      <small class="text-muted">
+                      @for($i=1;$i<=5;$i++)
+                        @if($i<=$average)
+                        &#9733;
+                        @else
+                        &#9734;
+                        @endif
+                      @endfor
+                      </small>
+                      @if($item->total_orders >= '2')
+                        <span class="badge badge-pill badge-primary float-right">Best Seller <i class="fas fa-flag"></i> </span>
+                      @endif
                     </div>
                     </div>
                 </div>

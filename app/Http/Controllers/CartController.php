@@ -21,7 +21,7 @@ class CartController extends Controller
         $cart = Cart::where('customer_id',Auth::user()->id)->where('product_id',$request->id)->first();
         $product = Product::where('id',$request->id)->first();
 
-        if($product->stock === '0'){
+        if($product->stock == '0'){
             return redirect()->back()->with('message','Item is out of stock');
         }
         if($cart){
@@ -68,9 +68,6 @@ class CartController extends Controller
             return redirect()->back()->with('message','Item is out of stock');
         }
         if($cart){
-            if($product->stock-1 < $cart->quantity){
-                return redirect()->back()->with('message','Limited quantity available ');
-            }
             $cart->update([
                 'quantity' => $cart->quantity-1,
             ]);

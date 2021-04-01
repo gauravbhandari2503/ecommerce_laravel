@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Order;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
+use DB;
+
 class UserProductController extends Controller
 {
     /**
