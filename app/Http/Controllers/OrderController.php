@@ -24,7 +24,7 @@ class OrderController extends Controller
 
     }
 
-    public function store(){
+    public function store(Request $request){
 
         $carts = Cart::where('customer_id',Auth::user()->id)->with(['product'])->get();
         foreach($carts as $cart){
@@ -35,6 +35,7 @@ class OrderController extends Controller
                 'quantity'    => $cart->quantity,
                 'price_per_piece' => $cart->product->mrp,
                 'amount'    => $cart->quantity *  ( $cart->product->mrp - $cart->product->discount / 100 * $cart->product->mrp ),
+                'address_id' => $request['address_id'],
             ]);
             $cart->delete();
             $order->statuses()->attach(1);

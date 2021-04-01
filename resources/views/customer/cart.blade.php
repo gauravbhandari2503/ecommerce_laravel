@@ -8,12 +8,12 @@
 @if(!$carts->first())
 	<h1 class="mt-5 text-center display-1"> Cart is Empty </h1>
 @else
-<div class="col-xs-6 float-right mt-5 mr-2">
+<div class="col-sm-2  mt-5 mr-2">
     <a type="button" class="btn btn-primary btn-sm btn-block " href="{{ url('/home/items') }}">
         <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
     </a>
 </div>
-<div class="container mt-5 p-5 float-right">
+<div class="container-fluid mt-5 p-5">
 	<div class="row">
 		<div class="col-xs-8">
 			<div class="panel panel-info">

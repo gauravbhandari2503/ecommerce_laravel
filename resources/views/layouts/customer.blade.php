@@ -42,26 +42,18 @@
               <ul class="dropdown-menu mt-2 rounded-0 primary-color border-0 z-depth-1">
                 @foreach($shareData['categories'] as $category)
                   <li class="dropdown-item dropdown-submenu">
-                    <a data-toggle="dropdown" href="{{route('categorySearch',$category->name)}}" class="dropdown-toggle w-100">{{$category->name}} </a>
+                    <a data-toggle="dropdown"  class="dropdown-toggle w-100"><a href="{{route('categorySearch',$category->name)}}">{{$category->name}} </a></a>
+                    @if ($category->children)
                     <ul class="dropdown-menu ml-2 rounded-0 primary-color border-0 z-depth-1">
-                    @foreach($category->child as $subcat)
-                      <li class="dropdown-item dropdown-submenu">
-                        <a  class=" w-100">{{$subcat->name}}</a>
-                        <ul class="dropdown-menu mr-2 rounded-0 primary-color border-0 z-depth-1 r-100 ">
-                          @foreach($subcat->child as $childcategory)
-                          <li class="dropdown-item">
-                            <a href="{{route('categorySearch',$childcategory->name)}}" class=" w-100">{{$childcategory->name}}</a>
-                          </li>
-                          @endforeach
-                        </ul>
-                      </li>
+                    @foreach($category->children as $childCategory)
+                      @include('partials/subcategory-navbar', ['category' => $childCategory])                                                
                     @endforeach
                     </ul>
+                    @endif
                   </li>
-                @endforeach  
+                @endforeach
               </ul>
           </li>
-
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/home/wishlist') }}">Wishlist <i class="fas fa-heart"></i></a>
           </li>
@@ -75,7 +67,7 @@
         </ul>
         <form class="form-inline my-2 my-lg-0" action=" {{ route('search') }}" method="POST">
           @csrf
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="title">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search product" aria-label="Search" name="title">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>

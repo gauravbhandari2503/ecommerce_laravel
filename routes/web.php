@@ -40,6 +40,7 @@ Route::prefix('dashboard')->middleware(['auth','role:Seller'])->group(function()
 });
 
 Route::prefix('/home')->middleware('auth')->group(function(){
+
     Route::resource('/items','App\Http\Controllers\UserProductController');
     
     Route::get('wishlist', [App\Http\Controllers\WishlistController::class,'index'])->name('wishlist');

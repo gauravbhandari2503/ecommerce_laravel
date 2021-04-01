@@ -16,7 +16,8 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
+                    <form  method="POST" action="{{ route('orderplaced') }}" >
+                    @csrf
                     <div class="form-group">
                         <label for="cardNumber">
                             CARD NUMBER</label>
@@ -46,16 +47,24 @@
                             </div>
                         </div>
                     </div>
-                    </form>
                 </div>
             </div>
             <ul class="nav nav-pills nav-stacked">
                 <li class="active"> Total Amount :<a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd"></span><i class="fa fa-rupee-sign" aria-hidden="true"></i>{{ $amount }}</span></a>
                 </li>
             </ul>
+            <ul class="nav nav-pills nav-stacked mt-5">
+                @if(!$user->addresses->first())
+                    <a class="btn btn-primary btn-lg active">Add Address</a>
+                @else
+                    <li class="active"> <h4>Select Address :</h4>
+                    @foreach($user->addresses as $useraddress)
+                        <input type="radio" name="address_id" value="{{$useraddress->id}}" checked> {{$useraddress->address}} <br>
+                    @endforeach
+                    </li>
+                @endif
+            </ul>
             <br/>
-            <form method="POST" action="{{ route('orderplaced') }}">
-                @csrf
                 <button type="submit" class="btn btn-success btn-lg btn-block" role="button">Pay</button>
             </form>
         </div>

@@ -3,31 +3,9 @@
 @php 
     $subtotal = 0;
 @endphp
-<div class="container mt-5 justify-content-center float-right">
+<div class="container-fluid">
     <div class="row">
         <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <address>
-                        <strong>Elf Cafe</strong>
-                        <br>
-                        2135 Sunset Blvd
-                        <br>
-                        Los Angeles, CA 90026
-                        <br>
-                        <abbr title="Phone">P:</abbr> (213) 484-6829
-                    </address>
-                    <a href="#">Change Address</a>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 text-right">
-                    <p>
-                        <em>Date: </em>
-                    </p>
-                    <p>
-                        <em>Receipt #: 34522677W</em>
-                    </p>
-                </div>
-            </div>
             <div class="row mt-5">
                 <div class="text-center">
                     <h1>Receipt</h1>
@@ -64,7 +42,7 @@
                             </p></td>
                             <td class="text-center">
                             <p>
-                                <strong><i class="fa fa-rupee-sign" aria-hidden="true"></i>{{ $subtotal }}</strong>
+                                <strong><i class="fa fa-rupee-sign" aria-hidden="true"></i> {{ $subtotal }}</strong>
                             </p>
                             <p>
                                 <strong>0</strong>

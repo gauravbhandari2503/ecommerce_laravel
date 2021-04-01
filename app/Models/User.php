@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function roles(){
         return $this->belongsToMany(Role::class);
     }
+
+    public function addresses(){
+        return $this->hasMany(Address::class);
+    }
 }
