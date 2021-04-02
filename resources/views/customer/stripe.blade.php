@@ -50,6 +50,7 @@
                     @endif
                 </ul> 
             </div> <br>
+            <input type="hidden" name="amount" value="{{$amount}}">
             <div class="panel panel-default credit-card-box">
             
                 <div class="panel-heading display-table" >

@@ -17,9 +17,9 @@ class StripePaymentController extends Controller
      */
     public function stripe(Request $request)
     {
-        $amount = $request->id;
+        $amount = $request->amount;
         $user = User::where('id',Auth::user()->id)->first();
         return view('customer.stripe',compact('user'))->with('amount',$amount);
     }
-    
+
 }

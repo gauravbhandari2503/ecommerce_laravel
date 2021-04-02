@@ -32,9 +32,10 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request ,  $amount){
+    public function store(Request $request){
         $carts = Cart::where('customer_id',Auth::user()->id)->with(['product'])->get();
-        foreach($carts as $cart){
+        foreach($carts as $cart)
+        {
             $order = Order::create([
                 'customer_id' => $cart->customer_id,
                 'product_id'  => $cart->product_id,
@@ -44,6 +45,7 @@ class OrderController extends Controller
                 'amount'    => $cart->quantity *  ( $cart->product->mrp - $cart->product->discount / 100 * $cart->product->mrp ),
                 'address_id' => $request['address_id'],
             ]);
+
             $cart->delete();
             $order->statuses()->attach(1);
             $product = Product::where('id',$cart->product_id)->first();
@@ -53,16 +55,17 @@ class OrderController extends Controller
             ]);
             $seller = User::where('id',$product->user_id)->first();
             $seller->notify(new OrderCreated());
+
         }
-        $user = User::where('id',Auth::user()->id)->first();
-        $user->notify(new OrderInitialized());
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         Stripe\Charge::create ([
-                "amount" => $amount * 100,
-                "currency" => 'INR',
-                "source" => $request->stripeToken,
-                "description" => "Test payment from RubiCart.com." 
+            "amount" => $request['amount'] * 100,
+            "currency" => 'INR',
+            "source" => $request->stripeToken,
+            "description" => "Test payment from RubiCart.com." 
         ]);
+        $user = User::where('id',Auth::user()->id)->first();
+        $user->notify(new OrderInitialized());
         return view('customer.orderplaced');
     }
 

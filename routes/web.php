@@ -54,8 +54,8 @@ Route::prefix('/home')->middleware('auth')->group(function(){
   
     
     Route::get('cart/order',[App\Http\Controllers\OrderController::class,'index'])->name('order');
-    Route::get('cart/order/payment/{id}',[App\Http\Controllers\StripePaymentController::class,'stripe']);
-    Route::post('cart/order/payment/{amount}',[App\Http\Controllers\OrderController::class,'store'])->name('stripe.post');
+    Route::post('cart/order/payment',[App\Http\Controllers\StripePaymentController::class,'stripe'])->name('stripe.show');
+    Route::post('cart/order/stripe',[App\Http\Controllers\OrderController::class,'store'])->name('stripe.post');
 
     Route::get('/orders',[App\Http\Controllers\OrderController::class,'userOrders'])->name('user.orders');
     Route::get('/orders/cancel/{orderId}',[App\Http\Controllers\OrderController::class,'orderCancelRequest']);

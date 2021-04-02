@@ -47,11 +47,18 @@ class User extends Authenticatable
         return false;
     }
 
-    public function roles(){
+    public function roles()
+    {
         return $this->belongsToMany(Role::class);
     }
 
-    public function addresses(){
+    public function addresses()
+    {
         return $this->hasMany(Address::class);
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
     }
 }

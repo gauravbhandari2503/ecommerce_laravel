@@ -57,7 +57,11 @@
                     </tbody>
                 </table>
             </div>
-                   <a href=/home/cart/order/payment/{{$subtotal}} class="btn btn-success btn-lg btn-block form-control btn-lg btn-block">    Pay Now   <span class="glyphicon glyphicon-chevron-right"></span></a>
+            <form method="POST" action="{{ route('stripe.show') }}">
+                @csrf
+                <input type="hidden" name="amount" value="{{ $subtotal }}" >
+                <button type="submit" class="btn btn-success btn-lg btn-block form-control btn-lg btn-block">    Pay Now   <span class="glyphicon glyphicon-chevron-right"></span></button>
+            </form>
         </div>
     </div>
 @endsection
