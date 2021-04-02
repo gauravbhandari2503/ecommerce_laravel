@@ -57,13 +57,7 @@
                     </tbody>
                 </table>
             </div>
-             
-            <form method="POST" action="/home/cart/order/payment/{{$subtotal}}">
-                @csrf
-                <div class="form-group ">
-                    <button type="submit" class="btn btn-success btn-lg btn-block form-control btn-lg btn-block">    Pay Now   <span class="glyphicon glyphicon-chevron-right"></span></button>
-                </div>
-            </form>
+                   <a href=/home/cart/order/payment/{{$subtotal}} class="btn btn-success btn-lg btn-block form-control btn-lg btn-block">    Pay Now   <span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
     </div>
 @endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
    
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Stripe;
    
@@ -13,28 +15,11 @@ class StripePaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function stripe()
+    public function stripe(Request $request)
     {
-        return view('stripe');
+        $amount = $request->id;
+        $user = User::where('id',Auth::user()->id)->first();
+        return view('customer.stripe',compact('user'))->with('amount',$amount);
     }
-  
-    /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function stripePost(Request $request)
-    {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        Stripe\Charge::create ([
-                "amount" => 100 * 100,
-                "currency" => 'INR',
-                "source" => $request->stripeToken,
-                "description" => "Test payment from itsolutionstuff.com." 
-        ]);
-  
-        Session::flash('success', 'Payment successful!');
-          
-        return back();
-    }
+    
 }

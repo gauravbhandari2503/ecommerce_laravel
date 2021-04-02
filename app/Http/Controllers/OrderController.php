@@ -14,6 +14,8 @@ use App\Notifications\OrderPlaced;
 use App\Notifications\OrderShipped;
 use App\Notifications\OrderCompleted;
 use App\Notifications\OrderCancelled;
+use Session;
+use Stripe;
 
 class OrderController extends Controller
 {
@@ -24,8 +26,13 @@ class OrderController extends Controller
 
     }
 
-    public function store(Request $request){
+    /**
+     * success response method.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
+    public function store(Request $request ,  $amount){
         $carts = Cart::where('customer_id',Auth::user()->id)->with(['product'])->get();
         foreach($carts as $cart){
             $order = Order::create([
@@ -49,6 +56,13 @@ class OrderController extends Controller
         }
         $user = User::where('id',Auth::user()->id)->first();
         $user->notify(new OrderInitialized());
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe\Charge::create ([
+                "amount" => $amount * 100,
+                "currency" => 'INR',
+                "source" => $request->stripeToken,
+                "description" => "Test payment from RubiCart.com." 
+        ]);
         return view('customer.orderplaced');
     }
 

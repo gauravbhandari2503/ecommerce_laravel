@@ -54,9 +54,8 @@ Route::prefix('/home')->middleware('auth')->group(function(){
   
     
     Route::get('cart/order',[App\Http\Controllers\OrderController::class,'index'])->name('order');
-    Route::post('cart/order/payment/{id}',[App\Http\Controllers\PaymentController::class,'paymentInfo']);
-
-    Route::post('cart/order/placed',[App\Http\Controllers\OrderController::class,'store'])->name('orderplaced');
+    Route::get('cart/order/payment/{id}',[App\Http\Controllers\StripePaymentController::class,'stripe']);
+    Route::post('cart/order/payment/{amount}',[App\Http\Controllers\OrderController::class,'store'])->name('stripe.post');
 
     Route::get('/orders',[App\Http\Controllers\OrderController::class,'userOrders'])->name('user.orders');
     Route::get('/orders/cancel/{orderId}',[App\Http\Controllers\OrderController::class,'orderCancelRequest']);
@@ -68,6 +67,3 @@ Route::prefix('/home')->middleware('auth')->group(function(){
     Route::post('product/search',[App\Http\Controllers\ProductSearchController::class,'index'])->name('search');
     Route::get('category/{categoryName}',[App\Http\Controllers\CategoryController::class,'viewByCategory'])->name('categorySearch');
 });
-
-Route::get('stripe', [App\Http\Controllers\StripePaymentController::class, 'stripe']);
-Route::post('stripe', [App\Http\Controllers\StripePaymentController::class, 'stripePost'])->name('stripe.post');

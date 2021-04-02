@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel 8 - Stripe Payment Gateway Integration Example - ItSolutionStuff.com</title>
+    <title>Laravel 8 - Stripe Payment Gateway Integration Example - RubiCart.com</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style type="text/css">
         .panel-title {
@@ -25,20 +27,40 @@
 <body>
   
 <div class="container">
-  
-    <h1>Laravel 8 - Stripe Payment Gateway Integration Example <br/> ItSolutionStuff.com</h1>
-  
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+        <form 
+            role="form" 
+            action="{{route('stripe.post',$amount)}}" 
+            method="post" 
+            class="require-validation"
+            data-cc-on-file="false"
+            data-stripe-publishable-key="pk_test_51IbePbSIGJMbCciEwm3BRykRDqCX56FEUDxSPKIUSxsjhoqYDbwHrwfZhFQeupvN9rF46Gnl9EIDwQxxdP3Cybz000HZsaGjE7"
+            id="payment-form">
+            <div class=" form control mt-5 mb-3">
+                <ul class="nav nav-pills nav-stacked ">
+                    @if(!$user->addresses->first())
+                        <a class="btn btn-primary btn-lg active">Add Address</a>
+                    @else
+                        <li class="active"> <h4>Select Address :</h4>
+                        @foreach($user->addresses as $useraddress)
+                            <input type="radio" name="address_id" value="{{$useraddress->id}}" checked> {{$useraddress->address}} <br>
+                        @endforeach
+                        </li>
+                    @endif
+                </ul> 
+            </div> <br>
             <div class="panel panel-default credit-card-box">
+            
                 <div class="panel-heading display-table" >
-                    <div class="row display-tr" >
+                    <div class="row display-tr " >
                         <h3 class="panel-title display-td" >Payment Details</h3>
                         <div class="display-td" >                            
-                            <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+                            <img class="img-responsive pull-right" src="https://www.pikpng.com/pngl/m/80-809937_visa-png-transparent-background-visa-logo-clipart.png">
                         </div>
                     </div>                    
                 </div>
+                    
                 <div class="panel-body">
   
                     @if (Session::has('success'))
@@ -48,16 +70,8 @@
                         </div>
                     @endif
   
-                    <form 
-                            role="form" 
-                            action="{{ route('stripe.post') }}" 
-                            method="post" 
-                            class="require-validation"
-                            data-cc-on-file="false"
-                            data-stripe-publishable-key="pk_test_51IbePbSIGJMbCciEwm3BRykRDqCX56FEUDxSPKIUSxsjhoqYDbwHrwfZhFQeupvN9rF46Gnl9EIDwQxxdP3Cybz000HZsaGjE7"
-                            id="payment-form">
+                    
                         @csrf
-  
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
                                 <label class='control-label'>Name on Card</label> <input
@@ -100,7 +114,7 @@
   
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($100)</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ( <i class="fa fa-rupee-sign" aria-hidden="true"></i> {{$amount}})</button>
                             </div>
                         </div>
                           
