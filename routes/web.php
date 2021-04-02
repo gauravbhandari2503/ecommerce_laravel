@@ -68,3 +68,6 @@ Route::prefix('/home')->middleware('auth')->group(function(){
     Route::post('product/search',[App\Http\Controllers\ProductSearchController::class,'index'])->name('search');
     Route::get('category/{categoryName}',[App\Http\Controllers\CategoryController::class,'viewByCategory'])->name('categorySearch');
 });
+
+Route::get('stripe', [App\Http\Controllers\StripePaymentController::class, 'stripe']);
+Route::post('stripe', [App\Http\Controllers\StripePaymentController::class, 'stripePost'])->name('stripe.post');
