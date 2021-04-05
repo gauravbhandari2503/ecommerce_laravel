@@ -16,7 +16,13 @@ class SellerProfileController extends Controller
         return view('seller.profilepage',['users' => $usersInfo]);
     }
 
+    public function userProfile(){
+        $userInfo = User::where('id',Auth::user()->id)->first();
+        return view('customer.profile',compact('userInfo'));
+    }
+
     public function update_avatar(Request $request){
+
         $request->validate([
             'avatar' => 'required|image|mimes:jpeg,png,jpg',
         ]);

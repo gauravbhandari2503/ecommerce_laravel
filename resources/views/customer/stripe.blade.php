@@ -37,10 +37,10 @@
             data-cc-on-file="false"
             data-stripe-publishable-key="pk_test_51IbePbSIGJMbCciEwm3BRykRDqCX56FEUDxSPKIUSxsjhoqYDbwHrwfZhFQeupvN9rF46Gnl9EIDwQxxdP3Cybz000HZsaGjE7"
             id="payment-form">
-            <div class=" form control mt-5 mb-3">
+            <div class="form control mt-5 mb-3">
                 <ul class="nav nav-pills nav-stacked ">
                     @if(!$user->addresses->first())
-                        <a class="btn btn-primary btn-lg active">Add Address</a>
+                        <a class="btn btn-primary btn-lg" href="{{ url('/home/profile/address') }}">Add Address</a>
                     @else
                         <li class="active"> <h4>Select Address :</h4>
                         @foreach($user->addresses as $useraddress)

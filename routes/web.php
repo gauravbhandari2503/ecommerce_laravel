@@ -42,7 +42,12 @@ Route::prefix('dashboard')->middleware(['auth','role:Seller'])->group(function()
 Route::prefix('/home')->middleware('auth')->group(function(){
 
     Route::resource('/items','App\Http\Controllers\UserProductController');
-    
+
+    Route::get('profile',[App\Http\Controllers\SellerProfileController::class,'userProfile'])->name('userProfilePage');;
+    Route::post('profile', [App\Http\Controllers\SellerProfileController::class, 'update_avatar']) -> name('profile.image');
+
+    Route::resource('/profile/address','App\Http\Controllers\AddressController');
+
     Route::get('wishlist', [App\Http\Controllers\WishlistController::class,'index'])->name('wishlist');
     Route::post('wishlist/add/{id}', [App\Http\Controllers\WishlistController::class,'store'])->name('wishlistAdd');
     Route::post('wishlist/{id}', [App\Http\Controllers\WishlistController::class,'destroy'])->name('wishlistRemove');

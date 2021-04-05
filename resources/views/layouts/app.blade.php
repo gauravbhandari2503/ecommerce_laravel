@@ -61,6 +61,9 @@
                                     <a class="dropdown-item" href="{{ url('/home/items') }}">
                                         Shop
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('userProfilePage') }}">
+                                        Profile
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
