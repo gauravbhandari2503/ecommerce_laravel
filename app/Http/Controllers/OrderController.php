@@ -33,6 +33,11 @@ class OrderController extends Controller
      */
 
     public function store(Request $request){
+
+        if($request['address_id'] === NULL){    
+            return redirect()->route('cart')->with('message','Address is Required ');
+        }
+
         $carts = Cart::where('customer_id',Auth::user()->id)->with(['product'])->get();
         foreach($carts as $cart)
         {
@@ -77,7 +82,9 @@ class OrderController extends Controller
     }
 
     public function userOrder($orderId){
+
         $order = Order::where('id',$orderId)->with('product')->with('statuses')->first();
+        $this->authorize('view', $order);
         return view('customer.view-order',compact('order'));
     }
     
@@ -132,6 +139,9 @@ class OrderController extends Controller
     }
 
     public function orderCancelRequest($orderId){
+
+        $this->authorize('cancelOrder', $orderId);
+
         $order = Order::where('id',$orderId)->with('product')->with('statuses')->first();
         foreach($order->statuses as $currentStatus){
             $currentStatus->status; 

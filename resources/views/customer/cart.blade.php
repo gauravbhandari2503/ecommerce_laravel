@@ -82,7 +82,7 @@
 		</div>
 	</div>
 	@if ($message = Session::get('message'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger mt-5">
             <p>{{$message}}</p>
         </div>
     @endif

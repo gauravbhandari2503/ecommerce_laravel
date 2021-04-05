@@ -45,7 +45,9 @@ class CartController extends Controller
     }
 
     public function increaseQuantity($cartId){
+       
         $cart = Cart::where('id',$cartId)->first();
+        $this->authorize('update', $cart);
         $product = Product::where('id',$cart->product_id)->first();
         if($product->stock === '0'){
             return redirect()->back()->with('message','Item is out of stock');
@@ -62,7 +64,9 @@ class CartController extends Controller
     }
 
     public function decreaseQuantity($cartId){
+
         $cart = Cart::where('id',$cartId)->first();
+        $this->authorize('update', $cart);
         $product = Product::where('id',$cart->product_id)->first();
         if($product->stock === '0'){
             return redirect()->back()->with('message','Item is out of stock');
